@@ -1,2 +1,4 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="flex items-center justify-center min-h-dvh gap-4 text-2xl">
+    <Icon icon="ph:database-duotone" />
+    <div class="font-semibold">SvelteBase</div>
+</div>
