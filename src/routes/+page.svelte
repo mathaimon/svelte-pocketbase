@@ -8,11 +8,15 @@
     let items = [];
 
     onMount(async () => {
+        await getPbItems();
+        console.log(items);
+    });
+
+    async function getPbItems() {
         items = await pb.collection("items").getFullList({
             sort: "-created",
         });
-        console.log(items);
-    });
+    }
 </script>
 
 <div class="flex items-center justify-center max-w-md gap-2 mx-auto">
