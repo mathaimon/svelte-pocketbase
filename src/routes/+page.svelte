@@ -46,7 +46,9 @@
     </Button>
 </div>
 {#if showError}
-    <div class="w-full max-w-md mx-auto mt-2 text-sm text-rose-800">* atleast 3 characters required</div>
+    <div class="w-full max-w-md mx-auto mt-2 text-sm dark:text-rose-700 text-rose-400">
+        * atleast 3 characters required
+    </div>
 {/if}
 <div class="flex flex-col max-w-md gap-3 mx-auto mt-10">
     <div class="flex items-center gap-2 text-xl font-semibold">
