@@ -17,14 +17,37 @@
             sort: "-created",
         });
     }
+
+    let itemInput = "";
+    let showError = false;
+
+    $: if (itemInput.length >= 3) {
+        showError = false;
+    }
+
+    async function addItem() {
+        if (itemInput.length >= 3) {
+            await pb.collection("items").create({
+                content: itemInput,
+            });
+            itemInput = "";
+            showError = false;
+            await getPbItems();
+        } else {
+            showError = true;
+        }
+    }
 </script>
 
 <div class="flex items-center justify-center max-w-md gap-2 mx-auto">
-    <Input placeholder="Add item" />
-    <Button variant="outline">
+    <Input bind:value={itemInput} placeholder="Add item" />
+    <Button variant="outline" on:click={addItem}>
         <Icon icon="ph:plus-circle-duotone" class="text-xl text-primary" />
     </Button>
 </div>
+{#if showError}
+    <div class="w-full max-w-md mx-auto mt-2 text-sm text-rose-800">* atleast 3 characters required</div>
+{/if}
 <div class="flex flex-col max-w-md gap-3 mx-auto mt-10">
     <div class="flex items-center gap-2 text-xl font-semibold">
         <Icon icon="ph:floppy-disk-duotone" class="text-2xl text-primary" /> Saved Items
