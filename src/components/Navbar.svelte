@@ -3,10 +3,10 @@
 </script>
 
 <nav class="flex items-center justify-between h-[3.5rem] border-b border-secondary px-4 fixed w-full bg-background">
-    <div class="flex items-center gap-2">
+    <a href="/" class="flex items-center gap-2">
         <Icon icon="ph:database-duotone" class="text-3xl text-primary" />
         <div class="font-semibold">SvelteBase</div>
-    </div>
+    </a>
     <Button on:click={toggleMode} variant="outline" size="icon">
         <Icon
             icon="ph:sun-duotone"
