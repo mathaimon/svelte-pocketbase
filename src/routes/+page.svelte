@@ -1,7 +1,8 @@
 <script>
-    import { Button } from "$lib/components/ui/button";
+    import { Button, buttonVariants } from "$lib/components/ui/button";
     import { Input } from "$lib/components/ui/input";
     import * as Card from "$lib/components/ui/card";
+    import * as Dialog from "$lib/components/ui/dialog";
     import { pb } from "$lib/pocketbase";
     import { onMount } from "svelte";
 
@@ -37,6 +38,11 @@
             showError = true;
         }
     }
+
+    async function deleteItem(id) {
+        await pb.collection("items").delete(id);
+        await getPbItems();
+    }
 </script>
 
 <div class="flex items-center justify-center max-w-md gap-2 mx-auto">
@@ -57,9 +63,23 @@
     {#each items as item}
         <Card.Root class="flex items-center justify-between px-3 py-2">
             <div>{item.content}</div>
-            <Button variant="ghost">
-                <Icon icon="ph:trash-duotone" class="text-lg text-rose-500" />
-            </Button>
+            <Dialog.Root>
+                <Dialog.Trigger class={buttonVariants({ variant: "ghost" })}>
+                    <Icon icon="ph:trash-duotone" class="text-lg text-rose-500" />
+                </Dialog.Trigger>
+                <Dialog.Content class="sm:max-w-md ">
+                    <Dialog.Header>Are you sure you want to delete this item ?</Dialog.Header>
+                    <Dialog.Footer>
+                        <div class="grid w-full grid-cols-2 gap-3">
+                            <Dialog.Close class={buttonVariants({ variant: "outline" })}>Cancel</Dialog.Close>
+                            <Dialog.Close
+                                class={buttonVariants({ variant: "destructive" })}
+                                on:click={() => deleteItem(item.id)}>Delete</Dialog.Close
+                            >
+                        </div>
+                    </Dialog.Footer>
+                </Dialog.Content>
+            </Dialog.Root>
         </Card.Root>
     {/each}
 </div>
