@@ -29,6 +29,7 @@
     }
 
     function onFileChange(event) {
+        formData.delete("file_raw");
         formData.append("file_raw", event.target.files[0]);
     }
 
