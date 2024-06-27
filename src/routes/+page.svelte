@@ -45,12 +45,12 @@
     }
 </script>
 
-<div class="flex items-center justify-center max-w-md gap-2 mx-auto">
+<form on:submit={addItem} class="flex items-center justify-center max-w-md gap-2 mx-auto">
     <Input bind:value={itemInput} placeholder="Add item" />
     <Button variant="outline" on:click={addItem}>
         <Icon icon="ph:plus-circle-duotone" class="text-xl text-primary" />
     </Button>
-</div>
+</form>
 {#if showError}
     <div class="w-full max-w-md mx-auto mt-2 text-sm dark:text-rose-700 text-rose-400">
         * atleast 3 characters required
